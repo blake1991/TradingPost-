@@ -1,0 +1,18 @@
+﻿<Window x:Class="TP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Flipping Calculator" Height="350" Width="525">
+    <Grid x:Name="mainForm" Loaded="mainForm_Loaded" SizeChanged="mainForm_SizeChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+       
+        </Grid.ColumnDefinitions>
+
+
+        <DataGrid x:Name="grid" Margin="0,50,0,0" VerticalAlignment="Center" Height="259" Width="497" DataContext="{Binding}" ItemsSource="{Binding}" IsReadOnly="True" Grid.ColumnSpan="3" HorizontalAlignment="Center" />
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="itemIdTB" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="0"/>
+        <Button x:Name="itemIdBTN" Content="Submit" Grid.Column="0" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="75" Click="itemIdBTN_Click" Background="#FFDAB4B4"/>
+</StackPanel>
+    </Grid>
+</Window>
