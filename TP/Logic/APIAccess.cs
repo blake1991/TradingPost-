@@ -29,8 +29,7 @@ namespace TP
                 {
                    
                     APIdata = await response.Content.ReadAsStringAsync();
-                    // Console.WriteLine("string recieved");
-                    //  Console.WriteLine(APIdata);
+       
                     return APIdata;
                 }
                 else
@@ -40,6 +39,8 @@ namespace TP
             }
         }
 
+        //used for batch searching
+        //takes up to 100 ids and returns the result
         public static async Task<string> FetchMultipleAPIDataAsync(string[] ids)
         {
             String APIdata = "something didn't work";
@@ -58,7 +59,6 @@ namespace TP
                 }
                 apiStr += "&fields=name,buy,sell";
 
-                Console.WriteLine(apiStr);
                 //gets the item by item id
                 HttpResponseMessage response = await client.GetAsync(apiStr);
 

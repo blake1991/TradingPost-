@@ -52,11 +52,11 @@ namespace TP
             {
                 if (minSell < sellPrice)
                 {
-                    return "Flippable";
+                    return "Yes";
                 }
                 else
                 {
-                    return "no";
+                    return "No";
                 }
             }
         }

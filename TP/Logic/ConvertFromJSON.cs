@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,29 +11,6 @@ namespace TP
 {
     public class ConvertFromJSON
     {
-
-        //{"results":[]}
-        //public static string[] ConvertSingleString(string APIResponse)
-        //{
-        //    Console.WriteLine(APIResponse.Length);
-        //    string RawData;  //used to store the string without JSON formatting
-        //    string[] SplitString; //stores the individual components of the api response
-
-        //    //remove the first 13 and last 3 characters from the response
-        //    if (APIResponse.Length > 14)
-        //    {
-        //        RawData = APIResponse.Substring(13, APIResponse.Length - (13 + 3));
-
-        //        //split the individual components up into a string array
-        //        SplitString = RawData.Split(',');
-
-        //        return SplitString;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
 
         //gets the newly converted string as an Item object
         //the api always returns id, name, buy, sell
@@ -53,7 +31,6 @@ namespace TP
                         newItem.Name = item[i + 1];
                         newItem.BuyPrice = item[i + 2].ToString();
                         newItem.SellPrice = item[i + 3].ToString();
-
 
                         itemList.Add(newItem);
 
@@ -82,10 +59,7 @@ namespace TP
             //split up the entire string by commas, every 4 values make up 1 item
             splitString = RawData.Split(',');
 
-           return GetConverted(splitString);
-
-            
+            return GetConverted(splitString);
         }
-
     }
 }
