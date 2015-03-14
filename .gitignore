@@ -4,13 +4,13 @@
 *.sln.docstates
 
 # Build results
-RecipeList/RecipeList/bin/
-RecipeList/RecipeList/obj/
+tp/TP/bin/
+tp/TP/obj/
 
-#RecipeList/RecipeList/bin/Debug/RecipeList.mdf
-#RecipeList/RecipeList/bin/Debug/RecipeList.vshost.exe.manifest
-#RecipeList/RecipeList/bin/Debug/RecipeList_log.ldf
-#RecipeList/RecipeList/obj/Debug/RecipeList_Content.g.cs
-#RecipeList/RecipeList/obj/Debug/RecipeList_Content.g.i.cs
-RecipeList/obj/
-RecipeList/bin/
+#tp/TP/bin/Debug/RecipeList.mdf
+#tp/TP/bin/Debug/RecipeList.vshost.exe.manifest
+#tp/TP/bin/Debug/RecipeList_log.ldf
+#tp/TP/obj/Debug/RecipeList_Content.g.cs
+#tp/TP/obj/Debug/RecipeList_Content.g.i.cs
+TP/obj/
+TP/bin/
