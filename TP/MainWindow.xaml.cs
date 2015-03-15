@@ -12,7 +12,6 @@ namespace TP
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// proof of concept
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -37,38 +36,38 @@ namespace TP
 
         private async void submitBTN_Click(object sender, RoutedEventArgs e)
         {
-            //gets the requested item from the text box
-            itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchSingleAPIDataAsync(itemIdTB.Text.ToString()));
-
-            Console.WriteLine(itemList.Count);
-
-            if (itemList.Count > 0)
+            if (itemIdTB.Text.Length > 0)
             {
+                //find if the item is already in the collection
                 bool contains = false;
                 foreach (var item in itemsCollection)
                 {
-                    if (item.Id == itemList.ElementAt(0).Id)
+                    if (item.Id == itemIdTB.Text.ToString())
                     {
                         contains = true;
                     }
                 }
 
-
+                //the item doesn't exist in the collection
                 if (contains == false)
                 {
-                    //can't add an item that isn't in game
-                    foreach (var item in itemList)
+                    //gets the requested item from the text box
+                    itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchSingleAPIDataAsync(itemIdTB.Text.ToString()));
+
+                    if (itemList.Count > 0) //checks to see if the api return anything
                     {
-                        itemsCollection.Add(item);
+                        foreach (var item in itemList)
+                        {
+                            itemsCollection.Add(item);
+                        }
+                        itemIdTB.Clear();
+                        Save();
                     }
-                    MessageBox.Show("Added!");
-                    itemIdTB.Clear();
-                    Save();
-                }
-                else
-                {
-                    MessageBox.Show("This item already exists");
-                    itemIdTB.Clear();
+                    else
+                    {
+                        MessageBox.Show("This item already exists in the grid or doesn't exist in game.");
+                        itemIdTB.Clear();
+                    }
                 }
             }
         }
@@ -87,10 +86,15 @@ namespace TP
 
         private void removeBTN_Click(object sender, RoutedEventArgs e)
         {
-            itemsCollection.RemoveAt(grid.SelectedIndex);
-            Save();
+            if (grid.SelectedIndex >= 0)
+            {
+                itemsCollection.RemoveAt(grid.SelectedIndex);
+                Save();
+            }
         }
 
+
+        //helper methods
         private async void Load()
         {
             itemsCollection.Clear();
