@@ -12,8 +12,7 @@
         <DataGrid x:Name="grid" Margin="0,50,0,0" VerticalAlignment="Center" Height="259" Width="497" DataContext="{Binding}" ItemsSource="{Binding}" IsReadOnly="True" Grid.ColumnSpan="3" HorizontalAlignment="Center" />
         <StackPanel Orientation="Horizontal">
             <TextBox x:Name="itemIdTB" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="0"/>
-            <Button x:Name="itemIdBTN" Content="Submit" Grid.Column="0" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="75" Click="itemIdBTN_Click" Background="#FFDAB4B4"/>
-            <Button x:Name="saveBTN" Height="20" Width="100" Margin="10,11,0,0" VerticalAlignment="Top" Content="Save" Click="saveBTN_Click"/>
+            <Button x:Name="itemIdBTN" Content="Submit" Grid.Column="0" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="75" Click="submitBTN_Click" Background="#FFDAB4B4"/>
             <Button x:Name="reloadBTN" Height="20" Width="100" Margin="10,11,0,0" VerticalAlignment="Top" Content="Reload" Click="reloadBTN_Click"/>
             <Button x:Name="removeBTN" Height="20" Width="100" Margin="10,11,0,0" VerticalAlignment="Top" Content="Remove" Click="removeBTN_Click"/>
 

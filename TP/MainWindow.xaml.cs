@@ -26,41 +26,49 @@ namespace TP
             itemsCollection = new ObservableCollection<Item>();
             grid.ItemsSource = itemsCollection;
             itemList = new List<Item>();
+            itemIdTB.Focus();
         }
 
-        private async void mainForm_Loaded(object sender, RoutedEventArgs e)
+        private void mainForm_Loaded(object sender, RoutedEventArgs e)
         {
             //loads the items from the itemids.txt file
-            string[] items = TP.DataAccess.DataAccess.LoadItems();
-            itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchMultipleAPIDataAsync(items));
-
-            foreach (var item in itemList)
-            {
-                itemsCollection.Add(item);
-            }
+            Load();
         }
 
-        private async void itemIdBTN_Click(object sender, RoutedEventArgs e)
+        private async void submitBTN_Click(object sender, RoutedEventArgs e)
         {
             //gets the requested item from the text box
             itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchSingleAPIDataAsync(itemIdTB.Text.ToString()));
 
-            bool contains = false;
-            foreach (var item in itemsCollection)
+            Console.WriteLine(itemList.Count);
+
+            if (itemList.Count > 0)
             {
-                if (item.Id == itemList.ElementAt(0).Id)
+                bool contains = false;
+                foreach (var item in itemsCollection)
                 {
-                    contains = true;
+                    if (item.Id == itemList.ElementAt(0).Id)
+                    {
+                        contains = true;
+                    }
                 }
-            }
 
 
-            if (contains == false)
-            {
-                //can't add an item that isn't in game
-                foreach (var item in itemList)
+                if (contains == false)
                 {
-                    itemsCollection.Add(item);
+                    //can't add an item that isn't in game
+                    foreach (var item in itemList)
+                    {
+                        itemsCollection.Add(item);
+                    }
+                    MessageBox.Show("Added!");
+                    itemIdTB.Clear();
+                    Save();
+                }
+                else
+                {
+                    MessageBox.Show("This item already exists");
+                    itemIdTB.Clear();
                 }
             }
         }
@@ -71,7 +79,35 @@ namespace TP
             grid.Width = this.Width - 20;
         }
 
-        private void saveBTN_Click(object sender, RoutedEventArgs e)
+
+        private void reloadBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Load();
+        }
+
+        private void removeBTN_Click(object sender, RoutedEventArgs e)
+        {
+            itemsCollection.RemoveAt(grid.SelectedIndex);
+            Save();
+        }
+
+        private async void Load()
+        {
+            itemsCollection.Clear();
+            string[] items = TP.DataAccess.DataAccess.LoadItems();
+
+            if (items.Length > 0)
+            {
+                itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchMultipleAPIDataAsync(items));
+
+                foreach (var item in itemList)
+                {
+                    itemsCollection.Add(item);
+                }
+            }
+        }
+
+        private void Save()
         {
             List<string> ids = new List<string>();
             foreach (var item in itemsCollection)
@@ -81,22 +117,6 @@ namespace TP
             TP.DataAccess.DataAccess.SaveItems(ids);
         }
 
-        private async void reloadBTN_Click(object sender, RoutedEventArgs e)
-        {
-            //reloads the items in the itemids.txt file to keep the pricing up to date
-            itemsCollection.Clear();
-            string[] items = TP.DataAccess.DataAccess.LoadItems();
-            itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchMultipleAPIDataAsync(items));
 
-            foreach (var item in itemList)
-            {
-                itemsCollection.Add(item);
-            }
-        }
-
-        private void removeBTN_Click(object sender, RoutedEventArgs e)
-        {
-            itemsCollection.RemoveAt(grid.SelectedIndex);
-        }
     }
 }
