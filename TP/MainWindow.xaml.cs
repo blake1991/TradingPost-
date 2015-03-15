@@ -1,12 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-//used for http calls
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using System.Linq;
+using System.Windows;
 
 namespace TP
 {
@@ -120,7 +114,5 @@ namespace TP
             }
             TP.DataAccess.DataAccess.SaveItems(ids);
         }
-
-
     }
 }
