@@ -18,7 +18,7 @@ namespace TP
     {
         public ObservableCollection<Item> itemsCollection;
         List<Item> itemList;
-        //   string iteminfo;
+
 
         public MainWindow()
         {
@@ -33,7 +33,7 @@ namespace TP
             //loads the items from the itemids.txt file
             string[] items = TP.DataAccess.DataAccess.LoadItems();
             itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchMultipleAPIDataAsync(items));
-            
+
             foreach (var item in itemList)
             {
                 itemsCollection.Add(item);
@@ -43,7 +43,6 @@ namespace TP
         private async void itemIdBTN_Click(object sender, RoutedEventArgs e)
         {
             //gets the requested item from the text box
-
             itemList = ConvertFromJSON.ConvertMultipleString(await APIAccess.FetchSingleAPIDataAsync(itemIdTB.Text.ToString()));
 
             bool contains = false;
@@ -64,7 +63,6 @@ namespace TP
                     itemsCollection.Add(item);
                 }
             }
-            
         }
 
         private void mainForm_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -94,7 +92,11 @@ namespace TP
             {
                 itemsCollection.Add(item);
             }
-           
+        }
+
+        private void removeBTN_Click(object sender, RoutedEventArgs e)
+        {
+            itemsCollection.RemoveAt(grid.SelectedIndex);
         }
     }
 }

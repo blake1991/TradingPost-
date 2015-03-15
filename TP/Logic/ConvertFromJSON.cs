@@ -18,13 +18,13 @@ namespace TP
         {
             List<Item> itemList = new List<Item>();
             Item newItem;
+
             if (!(item[0].Length < 1))
             {
                 for (int i = 0; i < item.Length; i++)
                 {
                     if (i % 4 == 0)
                     {
-
                         newItem = new Item();
 
                         newItem.Id = item[i];
@@ -33,7 +33,6 @@ namespace TP
                         newItem.SellPrice = item[i + 3].ToString();
 
                         itemList.Add(newItem);
-
                     }
                 }
             }
