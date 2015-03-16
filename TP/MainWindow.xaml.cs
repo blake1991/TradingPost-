@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -69,7 +70,10 @@ namespace TP
         private void mainForm_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //keeps the datagrid the same horizontal size of the window
+
+
             grid.Width = this.Width - 20;
+            grid.Height = Row2.Height.Value - 40;
         }
 
 
@@ -82,7 +86,7 @@ namespace TP
         {
             if (grid.SelectedIndex >= 0)
             {
-                itemsCollection.RemoveAt(grid.SelectedIndex);
+                itemsCollection.Remove((Item)grid.SelectedValue);
                 Save();
             }
         }
